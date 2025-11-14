@@ -1,0 +1,5 @@
+{
+  "name": "LinguaFlow B2",
+  "description": "An immersive language learning SaaS for Traditional Chinese speakers, focusing on B2/C1 English and Spanish for IELTS and TOEIC exams. It uses contextual dialogues and visual grammar maps, powered by Gemini.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF--8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>LinguaFlow B2 - 專為中文使用者的沈浸式英語、西班牙語、日語學習工具</title>
+    <meta name="description" content="透過 LinguaFlow B2，在真實情境中學習英語、西班牙語和日語。專為雅思、多益、DELE、JLPT 考試設計，我們的 AI 模擬對話和視覺化文法地圖，助您自信達到 B2 流利程度。" />
+    <meta name="keywords" content="語言學習, 學英文, 學西班牙文, 學日文, English learning, Spanish learning, Japanese learning, IELTS, TOEIC, DELE, JLPT, AI 語言學習, 沈浸式學習, B2 程度, 繁體中文" />
+    <link rel="canonical" href="https://[YOUR_VERCEL_APP_URL]" />
+    <link rel="alternate" hreflang="zh-TW" href="https://[YOUR_VERCEL_APP_URL]" />
+    <link rel="alternate" hreflang="en" href="https://[YOUR_VERCEL_APP_URL]" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://[YOUR_VERCEL_APP_URL]" />
+    <meta property="og:title" content="LinguaFlow B2 - 沈浸式英語、西班牙語、日語學習" />
+    <meta property="og:description" content="專為繁體中文使用者設計，透過 AI 模擬真實考試情境，有效提升您的語言能力至 B2/C1 水平。" />
+    <meta property="og:image" content="https://[YOUR_IMAGE_URL]/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://[YOUR_VERCEL_APP_URL]" />
+    <meta property="twitter:title" content="LinguaFlow B2 - 沈浸式英語、西班牙語、日語學習" />
+    <meta property="twitter:description" content="專為繁體中文使用者設計，透過 AI 模擬真實考試情境，有效提升您的語言能力至 B2/C1 水平。" />
+    <meta property="twitter:image" content="https://[YOUR_IMAGE_URL]/og-image.png" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': '#007BFF',
+              'brand-secondary': '#6C757D',
+              'brand-success': '#28A745',
+              'brand-danger': '#DC3545',
+              'brand-warning': '#FFC107',
+              'brand-info': '#17A2B8',
+              'dark-bg': '#121212',
+              'dark-surface': '#1E1E1E',
+              'dark-text': '#E0E0E0',
+              'dark-text-secondary': '#A0A0A0',
+              'dark-border': '#333333',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              logo: ['Caveat', 'cursive'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-dark-bg text-dark-text font-sans" style="font-family: 'Inter', 'Noto Sans TC', sans-serif;">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
