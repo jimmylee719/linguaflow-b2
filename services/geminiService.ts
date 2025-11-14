@@ -3,7 +3,8 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { DialogueResponse, Language, ConversationPart, FreestyleHistoryItem, VocabularyPracticeItem } from "../types";
 import { Scenario } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// FIX: Use process.env.API_KEY for the API key as per the guidelines.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const singleConversationPartSchema = {
     type: Type.OBJECT,
