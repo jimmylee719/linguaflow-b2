@@ -3,14 +3,21 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { DialogueResponse, Language, ConversationPart, FreestyleHistoryItem, VocabularyPracticeItem } from "../types";
 import { Scenario } from "../constants";
 
-// Fix: Use process.env.API_KEY as required by the coding guidelines.
-const apiKey = process.env.API_KEY;
-if (!apiKey) {
-  // This error will be thrown if the API_KEY is not set in the environment.
-  throw new Error("API_KEY environment variable not set.");
-}
+let aiInstance: GoogleGenAI | null = null;
 
-const ai = new GoogleGenAI({ apiKey });
+const getAiInstance = () => {
+    if (!aiInstance) {
+        const apiKey = process.env.API_KEY;
+        if (!apiKey) {
+            const userFriendlyMessage = "AI服務未設定。\n\n請部署此專案的擁有者在 Vercel 的專案設定中，新增一個名為 API_KEY 的環境變數，並填入有效的 Google Gemini API 金鑰。";
+            alert(userFriendlyMessage);
+            console.error("API_KEY environment variable not set.");
+            throw new Error("API_KEY environment variable not set.");
+        }
+        aiInstance = new GoogleGenAI({ apiKey });
+    }
+    return aiInstance;
+};
 
 // --- Schemas for AI responses ---
 
@@ -20,7 +27,6 @@ const singleConversationPartSchema = {
         speaker: { type: Type.STRING, description: "The speaker's role, e.g., 'AI Assistant', 'User', 'Examiner'." },
         text_original: { type: Type.STRING, description: "The original sentence in English, Spanish, or Japanese." },
         text_translation: { type: Type.STRING, description: "The Traditional Chinese translation of the sentence." },
-        // Fix: Removed unsupported 'enum' property from schema. Moved valid options to description.
         audio_lang_code: { type: Type.STRING, description: "The language code for text-to-speech. Must be one of: en-US, en-GB, es-ES, es-MX, ja-JP." },
         grammar_analysis: {
         type: Type.OBJECT,
@@ -51,7 +57,6 @@ const dialogueResponseSchema = {
   type: Type.OBJECT,
   properties: {
     scenario_title: { type: Type.STRING, description: "The title of the scenario, e.g., 'Negotiating a Supplier Contract'." },
-    // Fix: Removed unsupported 'enum' property and corrected description to align with app level and types.
     difficulty_level: { type: Type.STRING, description: "The difficulty level, which must be either 'B2' or 'C1'." },
     context_description: { type: Type.STRING, description: "A description of the situation in Traditional Chinese." },
     conversation: {
@@ -86,6 +91,7 @@ const vocabularyListSchema = {
 
 const callGemini = async (systemInstruction: string, userPrompt: string, responseSchema: object, temperature: number) => {
   try {
+    const ai = getAiInstance();
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: userPrompt,
@@ -115,7 +121,6 @@ const getLanguageConfig = (language: Language) => {
 export const generateDialogue = async (scenario: Scenario, language: Language): Promise<DialogueResponse> => {
   const { langName, examName } = getLanguageConfig(language);
   
-  // Fix: Updated prompt to request B2/C1 difficulty to match schema and app's target level.
   const systemInstruction = `You are a strict language examiner for ${examName}. Your task is to generate a realistic, challenging dialogue for a Traditional Chinese speaker learning ${langName}.
 - For each request, randomly choose a difficulty level between B2 and C1 to ensure variety.
 - The entire output MUST be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting.
