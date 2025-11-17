@@ -7,12 +7,12 @@ let aiInstance: GoogleGenAI | null = null;
 
 const getAiInstance = () => {
     if (!aiInstance) {
-        const apiKey = process.env.API_KEY;
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
         if (!apiKey) {
-            const userFriendlyMessage = "AI服務未設定。\n\n請部署此專案的擁有者在 Vercel 的專案設定中，新增一個名為 API_KEY 的環境變數，並填入有效的 Google Gemini API 金鑰。";
+            const userFriendlyMessage = "AI服務未設定。\n\n請部署此專案的擁有者在 Vercel 的專案設定中，新增一個名為 VITE_GEMINI_API_KEY 的環境變數，並填入有效的 Google Gemini API 金鑰。";
             alert(userFriendlyMessage);
-            console.error("API_KEY environment variable not set.");
-            throw new Error("API_KEY environment variable not set.");
+            console.error("VITE_GEMINI_API_KEY environment variable not set.");
+            throw new Error("VITE_GEMINI_API_KEY environment variable not set.");
         }
         aiInstance = new GoogleGenAI({ apiKey });
     }
